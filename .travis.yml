@@ -1,0 +1,19 @@
+language: go
+go:
+        - 1.8.x
+        - 1.9.x
+        - 1.10.x
+        - 1.11
+
+install:
+        - mkdir -p $HOME/gopath/src/baliance.com/
+        - ln -s $HOME/gopath/src/github.com/carmel/gooxml $HOME/gopath/src/baliance.com/gooxml
+
+script:
+        - cd $HOME/gopath/src/baliance.com/gooxml
+        - ./build-examples.sh
+        - go vet ./...
+        - go test ./...
+
+after_success:
+        - ./test-coverage.sh
