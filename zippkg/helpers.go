@@ -66,6 +66,7 @@ func AddFileFromDisk(z *zip.Writer, zipPath, diskPath string) error {
 	if err != nil {
 		return fmt.Errorf("error opening %s: %s", diskPath, err)
 	}
+	defer f.Close()
 	_, err = io.Copy(w, f)
 	return err
 }
