@@ -90,6 +90,13 @@ func (p Paragraph) AddRun() Run {
 func (p Paragraph) Runs() []Run {
 	ret := []Run{}
 	for _, c := range p.x.EG_PContent {
+		if c.Hyperlink != nil && c.Hyperlink.EG_ContentRunContent != nil {
+			for _, rc2 := range c.Hyperlink.EG_ContentRunContent {
+				if rc2.R != nil {
+					ret = append(ret, Run{p.d, rc2.R})
+				}
+			}
+		}
 		for _, rc := range c.EG_ContentRunContent {
 			if rc.R != nil {
 				ret = append(ret, Run{p.d, rc.R})
